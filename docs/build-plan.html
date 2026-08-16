@@ -1,0 +1,666 @@
+<title>Burgundy Bento Build</title>
+
+<style>
+  /* ---- Tokens: light (default, un-stamped) ---- */
+  :root {
+    --bg:        #F7F0E4;
+    --surface:   #FFFBF3;
+    --surface-2: #EFE3D0;
+    --ink:       #2C1B18;
+    --ink-2:     #6B5449;
+    --ink-3:     #99877A;
+    --wine:      #7A1220;
+    --wine-2:    #A83244;
+    --gilt:      #A8702A;
+    --line:      #E2D2BA;
+    --line-2:    #D2BE9F;
+    --chip-bg:   #F0E2CB;
+    --code-bg:   #F1E6D4;
+    --shadow:    0 1px 2px rgba(44,27,24,.05), 0 8px 24px -12px rgba(44,27,24,.18);
+  }
+
+  /* ---- Tokens: dark via system pref (no stamp), unless user forced light ---- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:        #17100E;
+      --surface:   #201613;
+      --surface-2: #2B1E19;
+      --ink:       #F4E8D6;
+      --ink-2:     #C0A995;
+      --ink-3:     #8B7665;
+      --wine:      #E0687C;
+      --wine-2:    #EE93A2;
+      --gilt:      #DBA75E;
+      --line:      #3A2A24;
+      --line-2:    #4C382F;
+      --chip-bg:   #2E211C;
+      --code-bg:   #1D1512;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  /* ---- Tokens: dark forced by toggle ---- */
+  :root[data-theme="dark"] {
+    --bg:        #17100E;
+    --surface:   #201613;
+    --surface-2: #2B1E19;
+    --ink:       #F4E8D6;
+    --ink-2:     #C0A995;
+    --ink-3:     #8B7665;
+    --wine:      #E0687C;
+    --wine-2:    #EE93A2;
+    --gilt:      #DBA75E;
+    --line:      #3A2A24;
+    --line-2:    #4C382F;
+    --chip-bg:   #2E211C;
+    --code-bg:   #1D1512;
+    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  /* ---- Base ---- */
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+    font-size: 16.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.1rem, 4vw, 2.5rem) 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  /* ---- Type roles ---- */
+  .mono {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+  }
+
+  .eyebrow {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 5.5vw, 3.3rem);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: .5rem 0 0;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    line-height: 1.2;
+    letter-spacing: -.018em;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-size: 1.02rem;
+    line-height: 1.3;
+    letter-spacing: -.008em;
+    font-weight: 650;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  p { margin: 0; max-width: 68ch; color: var(--ink-2); }
+  p.lede { font-size: 1.1rem; color: var(--ink-2); line-height: 1.6; }
+  strong { color: var(--ink); font-weight: 650; }
+  a { color: var(--wine); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, .card:focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; border-radius: 4px; }
+
+  /* ---- Section scaffold ---- */
+  section { display: flex; flex-direction: column; gap: 1.5rem; }
+  .sec-head { display: flex; flex-direction: column; gap: .5rem; }
+  .rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+  /* ---- Header ---- */
+  header { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chip {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    letter-spacing: .02em;
+    background: var(--chip-bg);
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: .3rem .7rem;
+    white-space: nowrap;
+  }
+  .chip-on { background: var(--wine); color: var(--bg); border-color: var(--wine); }
+
+  /* ---- Palette ---- */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .75rem;
+  }
+  .sw {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: .7rem;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+  }
+  .sw-block { height: 46px; border-radius: 7px; border: 1px solid var(--line-2); }
+  .sw-meta { display: flex; flex-direction: column; gap: .1rem; }
+  .sw-hex {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .sw-role { font-size: .72rem; color: var(--ink-3); line-height: 1.35; }
+
+  /* ---- Bento card grid ---- */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: .9rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.15rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: var(--shadow);
+  }
+  .card-tag {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .68rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--gilt);
+  }
+  .card p { font-size: .9rem; line-height: 1.55; }
+  .card .why {
+    font-size: .84rem;
+    color: var(--ink-3);
+    border-top: 1px dashed var(--line-2);
+    padding-top: .5rem;
+    margin-top: .15rem;
+  }
+  .card.wide { grid-column: 1 / -1; }
+
+  /* ---- Motion recipe rows ---- */
+  .recipes { display: flex; flex-direction: column; gap: .6rem; }
+  .recipe {
+    display: grid;
+    grid-template-columns: minmax(150px, 1.1fr) 2fr;
+    gap: .3rem 1.4rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--wine);
+    border-radius: 12px;
+    padding: .85rem 1.05rem;
+  }
+  .recipe-what { font-weight: 650; font-size: .93rem; color: var(--ink); }
+  .recipe-how { font-size: .89rem; color: var(--ink-2); line-height: 1.55; margin: 0; }
+  .recipe-how code { font-size: .84em; }
+  @media (max-width: 640px) {
+    .recipe { grid-template-columns: 1fr; gap: .3rem; }
+  }
+
+  /* ---- Phase spine ---- */
+  .phases { display: flex; flex-direction: column; gap: 0; }
+  .phase {
+    display: grid;
+    grid-template-columns: 3.1rem 1fr;
+    gap: 0 1.1rem;
+    padding: 1.15rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .phase:last-child { border-bottom: 1px solid var(--line); }
+  .phase-n {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .95rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--wine);
+    padding-top: .1rem;
+  }
+  .phase-body { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+  .phase-body p { font-size: .92rem; }
+  .phase-out {
+    font-size: .84rem;
+    color: var(--ink-3);
+  }
+  .phase-out b {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--gilt);
+    font-weight: 400;
+  }
+  @media (max-width: 560px) {
+    .phase { grid-template-columns: 1fr; gap: .4rem; }
+  }
+
+  /* ---- Code ---- */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    margin: 0;
+    font-size: .82rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  pre b { color: var(--wine); font-weight: 600; }
+  code {
+    font-family: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", ui-monospace, monospace;
+    background: var(--chip-bg);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: .05em .35em;
+    font-size: .86em;
+    color: var(--ink);
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: 1em; color: inherit; }
+
+  /* ---- Deferred list ---- */
+  .later { display: flex; flex-direction: column; gap: .6rem; }
+  .later-row {
+    display: grid;
+    grid-template-columns: minmax(140px, .9fr) 2fr;
+    gap: .3rem 1.4rem;
+    padding: .8rem 0;
+    border-bottom: 1px dashed var(--line-2);
+  }
+  .later-row:first-child { border-top: 1px dashed var(--line-2); }
+  .later-what { font-weight: 650; font-size: .93rem; color: var(--ink); }
+  .later-when { font-size: .89rem; color: var(--ink-2); line-height: 1.55; margin: 0; }
+  @media (max-width: 640px) {
+    .later-row { grid-template-columns: 1fr; gap: .25rem; }
+  }
+
+  /* ---- Closing note ---- */
+  .note {
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    border-radius: 16px;
+    padding: 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .note p { max-width: 66ch; }
+</style>
+
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Portfolio · Build plan</p>
+    <h1>Burgundy Bento Build</h1>
+    <p class="lede">A motion-first personal site built from your reference board — deep wine and cream, social-profile cards in a bento grid. No CMS, no database, no API keys. Every bit of the &ldquo;dynamic&rdquo; lives in how the page moves.</p>
+    <div class="chips">
+      <span class="chip chip-on">Motion-first</span>
+      <span class="chip">Guided build — I scaffold, you style</span>
+      <span class="chip">No deadline</span>
+      <span class="chip">Next.js + Tailwind + Motion</span>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <!-- ============ 1. READ ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">01 — What your reference is actually made of</p>
+      <h2>The design read</h2>
+      <p>Before any code, here's what I pulled out of the board so we're building against something specific rather than a vibe.</p>
+    </div>
+
+    <h3>Palette</h3>
+    <div class="swatches">
+      <div class="sw">
+        <div class="sw-block" style="background:#7B1E2C"></div>
+        <div class="sw-meta"><span class="sw-hex">#7B1E2C</span><span class="sw-role">Wine — nav pill, profile cards, primary buttons</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-block" style="background:#5C1220"></div>
+        <div class="sw-meta"><span class="sw-hex">#5C1220</span><span class="sw-role">Deep wine — hover states, card borders, depth</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-block" style="background:#F3E6CE"></div>
+        <div class="sw-meta"><span class="sw-hex">#F3E6CE</span><span class="sw-role">Cream — card fills, the light panels</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-block" style="background:#A89574"></div>
+        <div class="sw-meta"><span class="sw-hex">#A89574</span><span class="sw-role">Khaki — the page ground everything floats on</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-block" style="background:#C79A5B"></div>
+        <div class="sw-meta"><span class="sw-hex">#C79A5B</span><span class="sw-role">Gilt — accent, borrowed from the gilded interiors</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-block" style="background:#2A1A16"></div>
+        <div class="sw-meta"><span class="sw-hex">#2A1A16</span><span class="sw-role">Ink — body copy, warm rather than neutral black</span></div>
+      </div>
+    </div>
+    <p style="font-size:.88rem;color:var(--ink-3)">Sample these off the image yourself before locking them — screen colour picks drift. These are close, not gospel.</p>
+
+    <h3 style="margin-top:.75rem">Layout system</h3>
+    <div class="bento">
+      <div class="card">
+        <span class="card-tag">Grid</span>
+        <h3>Asymmetric bento</h3>
+        <p>Cards of unequal span on a 12-column grid — a wide hero, a tall portrait, small square stat blocks. Not a uniform card wall.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Radius</span>
+        <h3>Two-tier rounding</h3>
+        <p>Big containers sit around 24&ndash;28px; nested elements around 12&ndash;16px. Keeping the ratio consistent is what makes it read as designed.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Depth</span>
+        <h3>Picture-in-picture insets</h3>
+        <p>Small framed images overlapping larger ones, plus floating profile badges. This overlap is where the parallax will live.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Metaphor</span>
+        <h3>Social profile as chrome</h3>
+        <p>Follower counts, tab bars, &ldquo;Edit profile&rdquo; buttons — the UI of a social account borrowed as the frame for your actual work.</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <h3>One honest flag on the concept</h3>
+      <p>The social-profile framing is striking, but it's a <em>frame</em>, not the content. A hiring manager or client landing here needs to reach your actual work in one scroll. Keep the profile chrome as the wrapper, and make sure real projects — with images, roles, outcomes — sit inside it rather than being implied by follower counts. That's the difference between a portfolio and a moodboard.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 2. STACK ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">02 — Tooling</p>
+      <h2>The stack</h2>
+      <p>Everything below is free, has strong docs, and is what people building motion-heavy sites actually reach for. Nothing here needs a server you pay for.</p>
+    </div>
+
+    <div class="bento">
+      <div class="card">
+        <span class="card-tag">Framework</span>
+        <h3>Next.js — App Router</h3>
+        <p>React with routing, image optimisation, and font loading built in. Deploys to Vercel in one click.</p>
+        <p class="why">Over plain Vite/React: <code>next/image</code> and <code>next/font</code> alone save you hours, and your portfolio will be image-heavy.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Language</span>
+        <h3>TypeScript</h3>
+        <p>Catches typos in your project data before the page breaks. Set to a loose config so it helps without nagging.</p>
+        <p class="why">Since you're learning as you go, the editor autocomplete is worth more than the type safety.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Styling</span>
+        <h3>Tailwind CSS v4</h3>
+        <p>Your palette gets defined once in a <code>@theme</code> block, then used as <code>bg-wine</code>, <code>text-cream</code> everywhere.</p>
+        <p class="why">Over CSS Modules: for a design this token-driven, having the palette in one place you can tweak is the whole game.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Motion — core</span>
+        <h3>Motion for React</h3>
+        <p>The library formerly called Framer Motion. Handles reveals, hover physics, and the shared-layout transitions between your account tabs.</p>
+        <p class="why">Its <code>layoutId</code> feature is the single reason your nav pill and tab switching will feel expensive.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Motion — scroll</span>
+        <h3>Lenis</h3>
+        <p>Smooth inertial scrolling. Small, and it's what gives scroll-linked parallax that weighted, non-janky feel.</p>
+        <p class="why">Optional but transformative here. Add it in phase 3 and you'll immediately feel the difference.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Motion — timeline</span>
+        <h3>GSAP + ScrollTrigger</h3>
+        <p>Only if you want a complex pinned scroll sequence later. Fully free now, including ScrollTrigger.</p>
+        <p class="why">Don't install this on day one. Motion covers 90% of what you need; reach for GSAP when you hit the 10%.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Icons</span>
+        <h3>Lucide React</h3>
+        <p>Clean line icons matching the home / search / menu glyphs in your reference.</p>
+        <p class="why">Tree-shakeable, so unused icons cost nothing.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Hosting</span>
+        <h3>Vercel</h3>
+        <p>Free tier, connects to GitHub, redeploys on every push, gives you a preview URL per branch.</p>
+        <p class="why">Custom domain is roughly $10&ndash;15/yr and worth it — <code>yourname.com</code> reads better than a subdomain.</p>
+      </div>
+      <div class="card wide">
+        <span class="card-tag">Typography</span>
+        <h3>Font pairing</h3>
+        <p>Your reference uses a geometric sans throughout. Load via <code>next/font/google</code> so there's no layout shift. Two directions worth trying: <strong>Instrument Serif</strong> for display paired with <strong>Geist</strong> for body gives it an editorial, gallery-catalogue feel that suits the museum imagery. Or stay all-sans with <strong>Bricolage Grotesque</strong> for headings and <strong>Inter</strong> for body if you want closer fidelity to the board.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 3. MOTION ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">03 — The part you called &ldquo;dynamic&rdquo;</p>
+      <h2>Motion, mapped to your design</h2>
+      <p>Not generic animation advice — each of these is tied to a specific element visible in your reference board.</p>
+    </div>
+
+    <div class="recipes">
+      <div class="recipe">
+        <span class="recipe-what">Nav pill indicator</span>
+        <p class="recipe-how">The wine pill holding your four account tabs. Give the active-tab highlight a shared <code>layoutId</code> — Motion then physically slides it between tabs instead of cutting. Roughly six lines of code, and it's the first thing people notice.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Bento entrance</span>
+        <p class="recipe-how">Cards rise and fade as they enter the viewport, staggered ~60ms apart. Use <code>whileInView</code> with <code>viewport={{ once: true }}</code> so it doesn't re-fire on every scroll-back — that re-firing is what makes sites feel cheap.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Hero parallax</span>
+        <p class="recipe-how">The small framed inset over the large portrait. Drive both from <code>useScroll</code> at different <code>useTransform</code> rates so the inset drifts against the backdrop. Keep the offset under ~40px — subtle reads as expensive, large reads as a template.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Stat count-up</span>
+        <p class="recipe-how">Your 337 / 687 / 1,373 numbers ticking up from zero when scrolled into view. Use <code>useMotionValue</code> + <code>animate</code>, and set <code>font-variant-numeric: tabular-nums</code> or the digits will jitter the layout as they change width.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Card tilt on hover</span>
+        <p class="recipe-how">Profile cards tilting toward the cursor via <code>rotateX</code>/<code>rotateY</code> mapped from pointer position, wrapped in <code>useSpring</code> for weight. Cap the rotation around 6&ndash;8 degrees. Gate it behind a pointer check so it never fires on touch.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Tab transitions</span>
+        <p class="recipe-how">Your showpiece. Switching between the Facebook / Instagram / TikTok / Pinterest views morphs the shared elements — avatar, name, container — rather than swapping panels. Motion's <code>AnimatePresence</code> plus <code>layoutId</code> on the persistent pieces.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Image reveals</span>
+        <p class="recipe-how">Gallery images wiping in under an animated <code>clip-path</code> instead of a plain fade. Suits the museum photography and costs nothing in performance.</p>
+      </div>
+      <div class="recipe">
+        <span class="recipe-what">Reduced motion</span>
+        <p class="recipe-how">Not optional. Wrap everything in a <code>useReducedMotion</code> check so animations collapse to instant states for anyone who's asked their OS for that. This is an accessibility requirement, and it's five minutes of work if you build it in from phase 3 rather than retrofitting.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 4. PHASES ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">04 — Sequence</p>
+      <h2>Build phases</h2>
+      <p>Genuinely ordered — each phase depends on the one before it. The big rule: <strong>the entire site works and looks right before a single animation exists.</strong> Motion is a layer you add on top of something finished, never a thing you build alongside layout.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase">
+        <span class="phase-n">00</span>
+        <div class="phase-body">
+          <h3>Foundation</h3>
+          <p>Scaffold Next.js with TypeScript and Tailwind, initialise git, push to GitHub, connect Vercel. You'll have a live URL before you've written any of your own code.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;pushing to main updates a real public URL.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">01</span>
+        <div class="phase-body">
+          <h3>Tokens and type</h3>
+          <p>Palette into a Tailwind <code>@theme</code> block, fonts wired through <code>next/font</code>, the radius and spacing scale set. Build one throwaway page that shows every colour and text size together.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;you can change one hex value and watch the whole site shift.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">02</span>
+        <div class="phase-body">
+          <h3>Static layout, real content</h3>
+          <p>Every section built with zero animation and your actual work in it — real project images, real copy, real bio. Responsive from 360px up. This is the longest phase and the one that decides whether the site is any good.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;it's genuinely shippable as-is, just still.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">03</span>
+        <div class="phase-body">
+          <h3>Motion foundations</h3>
+          <p>Install Motion and Lenis. Build one reusable <code>&lt;Reveal&gt;</code> component with the reduced-motion guard baked in, and apply it everywhere. Resist adding anything custom yet.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;the whole page reveals coherently and OS reduced-motion turns it all off.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">04</span>
+        <div class="phase-body">
+          <h3>Signature interactions</h3>
+          <p>The nav pill indicator, bento stagger, hero parallax, stat count-ups, card tilt. Add one at a time and deploy after each — that way you always know which change broke something.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;the page feels alive without feeling busy.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">05</span>
+        <div class="phase-body">
+          <h3>The tab transition</h3>
+          <p>Shared-layout morphing between the four account views. Hardest piece, highest payoff — which is why it comes after you're comfortable with Motion's basics rather than first.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;switching tabs morphs rather than cuts.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <span class="phase-n">06</span>
+        <div class="phase-body">
+          <h3>Polish and ship</h3>
+          <p>Images converted to WebP and sized properly, Lighthouse run, keyboard navigation checked, focus states visible, alt text written, page metadata and social preview image set, custom domain pointed.</p>
+          <p class="phase-out"><b>Done when</b> &nbsp;Lighthouse performance and accessibility both clear 90.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 5. STRUCTURE ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">05 — Shape of the repo</p>
+      <h2>Project structure</h2>
+      <p>Content lives in plain data files, so adding a project means editing one array — not touching any layout code. That's how you get CMS-like convenience without a CMS.</p>
+    </div>
+
+<pre><code>portfolio/
+├─ app/
+│  ├─ layout.tsx          <b>fonts, metadata, Lenis provider</b>
+│  ├─ page.tsx            <b>the single-page composition</b>
+│  └─ globals.css         <b>@theme — your palette lives here</b>
+├─ components/
+│  ├─ motion/
+│  │  ├─ Reveal.tsx       <b>the reusable scroll-in primitive</b>
+│  │  ├─ CountUp.tsx
+│  │  └─ TiltCard.tsx
+│  ├─ NavPill.tsx
+│  ├─ Hero.tsx
+│  ├─ BentoGrid.tsx
+│  └─ AccountTabs.tsx
+├─ content/
+│  ├─ projects.ts         <b>edit this to add work</b>
+│  ├─ profile.ts          <b>bio, socials, stats</b>
+│  └─ types.ts
+├─ public/images/
+└─ docs/build-plan.html   <b>this file</b>
+</code></pre>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ 6. LATER ============ -->
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">06 — Deliberately not building</p>
+      <h2>Deferred, with triggers</h2>
+      <p>You ruled these out, and I agree for a v1 — but here's the honest signal for when each one starts earning its complexity.</p>
+    </div>
+
+    <div class="later">
+      <div class="later-row">
+        <span class="later-what">A CMS</span>
+        <p class="later-when">Add Sanity or Contentlayer when editing <code>projects.ts</code> starts feeling like a chore, or when you want to post from your phone. Until then a data file is faster and free.</p>
+      </div>
+      <div class="later-row">
+        <span class="later-what">Live social APIs</span>
+        <p class="later-when">Realistically, probably never. Instagram and TikTok both require app review, tokens that expire, and a business account — for numbers that change slowly. Hardcode the counts in <code>profile.ts</code> and update them when you remember.</p>
+      </div>
+      <div class="later-row">
+        <span class="later-what">Contact form</span>
+        <p class="later-when">Add a Next.js route handler plus Resend when you actually want inbound messages. For v1, a <code>mailto:</code> link converts just as well and takes thirty seconds.</p>
+      </div>
+      <div class="later-row">
+        <span class="later-what">Blog / writing</span>
+        <p class="later-when">MDX when you have three posts already written. Setting up a blog before you have anything to put in it is the most reliable way to stall a portfolio.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============ NEXT ============ -->
+  <section>
+    <div class="note">
+      <p class="eyebrow">Next step</p>
+      <h2>Where we start</h2>
+      <p>Phase 00 and 01 together are one working session — I scaffold the project, wire your palette and fonts into Tailwind, and get it deploying to a live URL. From there you're editing real files with something on screen to react to, which is a much better way to learn this than reading setup docs.</p>
+      <p style="color:var(--ink-3);font-size:.9rem">Two things worth gathering before phase 02, since it's the phase that decides whether the site works: the 4&ndash;6 projects you want to show, and one good image for each.</p>
+    </div>
+  </section>
+
+</div>

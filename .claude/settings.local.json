@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(npx --yes create-next-app@14 portfolio-tmp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(cd \"d:/Portfolio/portfolio-tmp\" && rm -rf .git && ls -la)",
+      "Bash(rm -rf src/app/fonts)",
+      "Bash(npm install *)"
+    ],
+    "additionalDirectories": [
+      "d:\\Portfolio\\portfolio-tmp\\.git"
+    ]
+  }
+}
