@@ -2,7 +2,7 @@
 
 My personal portfolio — a single-page site introducing who I am, what I've worked on, and how to reach me.
 
-**Live site:** [placeholder — link coming soon]()
+**Live site:** https://keyachaudhary.netlify.app/
 
 ## About the Project
 
@@ -26,15 +26,7 @@ src/
 └── content/        # Editable content — profile info and project list live here
 ```
 
-Content (name, bio, socials, project list) is kept separate from components in `src/content/`, so updating what the site *says* doesn't require touching how it's *built*.
 
-## About Me
-
-Hi, I'm **Keya Chaudhary** — a student and developer building things I'm curious about. This portfolio is where I collect and showcase projects as I learn and grow.
-
-- 🔗 [LinkedIn](https://www.linkedin.com/in/keya-chaudhary/)
-- 💻 [GitHub](https://github.com/keya-05)
-- 📧 chaudhary.keya18@gmail.com
 
 ## Running Locally
 
