@@ -4,7 +4,7 @@ import Reveal from "./motion/Reveal";
 
 export default function ProjectsGrid() {
   return (
-    <section id="work" className="mx-auto max-w-5xl px-4 py-16 sm:py-20">
+    <section id="work" className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-20 lg:px-16 xl:px-24">
       <Reveal className="mb-10 flex flex-col gap-2 text-center lg:text-left">
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
           Selected work
@@ -13,7 +13,7 @@ export default function ProjectsGrid() {
           Projects
         </h2>
       </Reveal>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, i) => (
           <Reveal
             key={project.id}

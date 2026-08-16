@@ -4,7 +4,7 @@ import Reveal from "./motion/Reveal";
 
 export default function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-5xl px-4 py-16 sm:py-24">
+    <section id="contact" className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-24 lg:px-16 xl:px-24">
       <Reveal className="flex flex-col items-center gap-6 rounded-card border border-line bg-surface p-10 text-center shadow-card sm:p-14">
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
           Get in touch

@@ -70,7 +70,7 @@ export default function NavBar() {
 
   return (
     <div className="sticky top-4 z-50 flex justify-center px-4">
-      <nav className="flex w-full max-w-xl items-center justify-between gap-2 rounded-full border border-line-2 bg-wine px-2 py-2 shadow-card">
+      <nav className="flex w-full max-w-2xl items-center justify-between gap-2 rounded-full border border-line-2 bg-wine px-2 py-2 shadow-card">
         <a
           href="#home"
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-bg font-display text-sm font-bold text-wine"

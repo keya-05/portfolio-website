@@ -19,7 +19,7 @@ export default function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 sm:py-24 lg:grid-cols-[1.2fr_.8fr] lg:gap-16 lg:py-20"
+      className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-10 px-6 py-16 sm:px-10 sm:py-24 lg:grid-cols-[1.2fr_.8fr] lg:gap-20 lg:px-16 lg:py-20 xl:px-24"
     >
       <Reveal className="flex flex-col items-start gap-6 text-center lg:text-left">
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
