@@ -6,7 +6,7 @@ import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-bg">
+    <main className="relative z-10 min-h-screen">
       <NavBar />
       <Hero />
       <ProjectsGrid />

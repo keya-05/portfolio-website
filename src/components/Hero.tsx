@@ -22,7 +22,7 @@ export default function Hero() {
       className="mx-auto grid max-w-screen-2xl grid-cols-1 items-center gap-10 px-6 py-16 sm:px-10 sm:py-24 lg:grid-cols-[1.2fr_.8fr] lg:gap-20 lg:px-16 lg:py-20 xl:px-24"
     >
       <Reveal className="flex flex-col items-start gap-6 text-center lg:text-left">
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-coral">
           Portfolio
         </span>
         <h1 className="text-balance font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
@@ -34,13 +34,13 @@ export default function Hero() {
         <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
           <a
             href="#work"
-            className="rounded-full bg-wine px-6 py-3 text-sm font-semibold text-bg shadow-card transition-colors hover:bg-wine-2"
+            className="rounded-full bg-coral px-6 py-3 text-sm font-semibold text-foam shadow-card transition-colors hover:bg-coral-2"
           >
             See my work
           </a>
           <a
             href="#contact"
-            className="rounded-full border border-line-2 bg-surface px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-wine hover:text-wine"
+            className="rounded-full border border-line-2 bg-surface/90 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-sm transition-colors hover:border-coral hover:text-coral"
           >
             Get in touch
           </a>

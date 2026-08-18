@@ -2,9 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: 210 240 250;
+  --color-surface: 235 249 253;
+  --color-surface-2: 214 240 249;
+  --color-coral: 224 83 63;
+  --color-coral-2: 238 122 102;
+  --color-gold: 217 164 65;
+  --color-foam: 244 253 255;
+  --color-ink: 10 36 54;
+  --color-ink-2: 35 74 97;
+  --color-ink-3: 92 133 154;
+  --color-line: 175 222 238;
+  --color-line-2: 141 202 224;
+  --bg-wash-alpha: 0.72;
+}
+
+.dark {
+  --color-bg: 8 22 38;
+  --color-surface: 15 36 58;
+  --color-surface-2: 21 48 74;
+  --color-coral: 232 128 108;
+  --color-coral-2: 242 158 138;
+  --color-gold: 232 190 108;
+  --color-ink: 224 241 250;
+  --color-ink-2: 168 202 219;
+  --color-ink-3: 112 148 168;
+  --color-line: 34 66 94;
+  --color-line-2: 46 87 118;
+  --bg-wash-alpha: 0.82;
+}
+
 body {
-  background-color: #a89574;
-  color: #2c1b18;
+  position: relative;
+  background-color: rgb(var(--color-bg));
+  background-image: url("/images/bg.jpg");
+  background-repeat: repeat;
+  background-size: 380px 380px;
+  background-attachment: fixed;
+  color: rgb(var(--color-ink));
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: rgb(var(--color-bg) / var(--bg-wash-alpha));
+  transition: background-color 0.4s ease;
 }
 
 @layer utilities {
@@ -19,4 +66,57 @@ body {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Floating bubbles overlay */
+@keyframes float-up {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--bubble-opacity, 0.5);
+  }
+  92% {
+    opacity: var(--bubble-opacity, 0.5);
+  }
+  100% {
+    transform: translateY(-115vh) translateX(var(--bubble-drift, 24px));
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: -12vh;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 32% 28%,
+    rgb(255 255 255 / 0.85),
+    rgb(255 255 255 / 0.12) 60%,
+    rgb(255 255 255 / 0) 78%
+  );
+  border: 1px solid rgb(255 255 255 / 0.35);
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* Porthole frame mask: transparent center (reveals the photo),
+   opaque ring (the frame art), transparent past the rim (drops the
+   image's white corners). Tuned by eye against window.jpg. */
+.porthole-frame {
+  -webkit-mask-image: radial-gradient(
+    circle,
+    transparent 0 29%,
+    black 30% 48%,
+    transparent 49% 100%
+  );
+  mask-image: radial-gradient(
+    circle,
+    transparent 0 29%,
+    black 30% 48%,
+    transparent 49% 100%
+  );
 }

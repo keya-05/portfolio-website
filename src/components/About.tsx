@@ -4,9 +4,9 @@ import Reveal from "./motion/Reveal";
 export default function About() {
   return (
     <section id="about" className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-20 lg:px-16 xl:px-24">
-      <Reveal className="grid grid-cols-1 gap-8 rounded-card border border-line bg-surface p-8 shadow-card sm:p-10 lg:grid-cols-[.6fr_1fr] lg:gap-12 lg:p-14">
+      <Reveal className="grid grid-cols-1 gap-8 rounded-card border border-line bg-surface/90 p-8 shadow-card backdrop-blur-sm sm:p-10 lg:grid-cols-[.6fr_1fr] lg:gap-12 lg:p-14">
         <div className="flex flex-col gap-2">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-coral">
             About
           </span>
           <h2 className="text-balance font-display text-3xl font-bold text-ink">

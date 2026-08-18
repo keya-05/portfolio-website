@@ -31,7 +31,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-3"
       style={{
         backgroundImage:
-          "repeating-linear-gradient(135deg, rgba(122,18,32,0.06) 0px, rgba(122,18,32,0.06) 10px, transparent 10px, transparent 20px)",
+          "repeating-linear-gradient(135deg, rgb(var(--color-coral) / 0.08) 0px, rgb(var(--color-coral) / 0.08) 10px, transparent 10px, transparent 20px)",
       }}
     >
       <ImageIcon size={22} strokeWidth={1.5} />
@@ -40,7 +40,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <TiltCard className="flex h-full flex-col gap-4 rounded-card border border-line bg-surface p-5 shadow-card">
+    <TiltCard className="flex h-full flex-col gap-4 rounded-card border border-line bg-surface/90 p-5 shadow-card backdrop-blur-sm">
       {mounted && !reduce ? (
         <motion.div
           className={imageFrameClassName}
@@ -59,7 +59,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <h3 className="font-display text-lg font-bold text-ink">
           {project.title}
         </h3>
-        <p className="text-sm font-medium text-wine">{project.role}</p>
+        <p className="text-sm font-medium text-coral">{project.role}</p>
         <p className="text-sm leading-relaxed text-ink-2">
           {project.description}
         </p>
@@ -82,7 +82,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-wine hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-coral hover:underline"
           >
             View project <ArrowUpRight size={14} />
           </a>
