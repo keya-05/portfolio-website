@@ -20,8 +20,8 @@ export const projects: Project[] = [
     description:
       "NLP-driven middleware built with LangChain that translates natural language queries into optimized SQL execution plans. Engineered fault-tolerant workflows with full test coverage for zero-downtime API execution, and used LangSmith and LM Studio to debug LLM latency and reduce hallucination.",
     tags: ["Model Context Protocol", "REST APIs", "React", "Node.js", "MySQL"],
-    image: undefined,
-    link: undefined,
+    image: "/images/projects/pizzabroker.png",
+    link: "https://pizzabroker.netlify.app/",
   },
   {
     id: "shopsphere",

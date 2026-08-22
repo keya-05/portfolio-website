@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   }, []);
 
   const imageFrameClassName =
-    "relative aspect-[16/10] overflow-hidden rounded-[14px] border border-line-2 bg-surface-2";
+    "relative h-36 sm:h-40 overflow-hidden rounded-[14px] border border-line-2 bg-surface-2";
 
   const imageContent = project.image ? (
     <Image
@@ -40,7 +40,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <TiltCard className="flex h-full flex-col gap-4 rounded-card border border-line bg-surface p-5 shadow-card">
+    <TiltCard className="flex h-full flex-col gap-3 rounded-card border border-line bg-surface p-4 shadow-card">
       {mounted && !reduce ? (
         <motion.div
           className={imageFrameClassName}
@@ -55,28 +55,28 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className={imageFrameClassName}>{imageContent}</div>
       )}
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-1">
         <h3 className="font-display text-lg font-bold text-ink">
           {project.title}
         </h3>
         <p className="text-sm font-medium text-wine">{project.role}</p>
-        <p className="text-sm leading-relaxed text-ink-2">
+        <p className="line-clamp-2 text-sm leading-relaxed text-ink-2">
           {project.description}
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {project.tags.map((tag, i) => (
           <span
             key={`${project.id}-tag-${i}`}
-            className="rounded-full border border-line bg-surface-2 px-2.5 py-1 font-mono text-xs text-ink-2"
+            className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-mono text-xs text-ink-2"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <div className="mt-auto pt-1">
+      <div className="mt-auto">
         {project.link ? (
           <a
             href={project.link}
