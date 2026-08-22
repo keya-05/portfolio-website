@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       alt={project.title}
       fill
       sizes="(min-width: 1024px) 480px, 90vw"
-      className="object-cover"
+      className="object-cover object-top"
     />
   ) : (
     <div
