@@ -44,6 +44,16 @@ export default function Hero() {
           >
             Get in touch
           </a>
+          {profile.resume && (
+            <a
+              href={profile.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-line-2 bg-surface px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-wine hover:text-wine"
+            >
+              Resume
+            </a>
+          )}
         </div>
       </Reveal>
       <motion.div

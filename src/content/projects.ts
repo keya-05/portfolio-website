@@ -4,42 +4,32 @@ import type { Project } from "./types";
 // Leave `image` and `link` unset until you have them; both render clean placeholders.
 export const projects: Project[] = [
   {
-    id: "project-one",
-    title: "Project One",
-    role: "Your role on this project",
+    id: "sentiment-analysis",
+    title: "Sentiment Analysis from User Feedback",
+    role: "Full-stack developer",
     description:
-      "A sentence or two on what this was, the problem it solved, and the outcome. Specifics beat adjectives.",
-    tags: ["Tag", "Tag"],
+      "Multi-tier application with decoupled frontend and backend services, integrating external LLM APIs for automated sentiment classification. Used targeted prompt engineering to cut model hallucination and built optimized backend pipelines for stable, large-scale feedback processing.",
+    tags: ["React", "Node.js", "REST APIs", "MySQL"],
     image: undefined,
     link: undefined,
   },
   {
-    id: "project-two",
-    title: "Project Two",
-    role: "Your role on this project",
+    id: "intelligent-order-management",
+    title: "Intelligent Order Management System",
+    role: "Backend developer",
     description:
-      "A sentence or two on what this was, the problem it solved, and the outcome.",
-    tags: ["Tag", "Tag"],
+      "NLP-driven middleware built with LangChain that translates natural language queries into optimized SQL execution plans. Engineered fault-tolerant workflows with full test coverage for zero-downtime API execution, and used LangSmith and LM Studio to debug LLM latency and reduce hallucination.",
+    tags: ["Model Context Protocol", "REST APIs", "React", "Node.js", "MySQL"],
     image: undefined,
     link: undefined,
   },
   {
-    id: "project-three",
-    title: "Project Three",
-    role: "Your role on this project",
+    id: "shopsphere",
+    title: "ShopSphere — Full Stack E-Commerce Platform",
+    role: "Full-stack developer",
     description:
-      "A sentence or two on what this was, the problem it solved, and the outcome.",
-    tags: ["Tag", "Tag"],
-    image: undefined,
-    link: undefined,
-  },
-  {
-    id: "project-four",
-    title: "Project Four",
-    role: "Your role on this project",
-    description:
-      "A sentence or two on what this was, the problem it solved, and the outcome.",
-    tags: ["Tag", "Tag"],
+      "MERN-stack e-commerce application with user authentication, product management, cart, and order processing. Designed RESTful APIs for user management, catalog handling, and transaction workflows behind a responsive React frontend and modular backend services.",
+    tags: ["React", "Node.js", "Express.js", "MongoDB"],
     image: undefined,
     link: undefined,
   },
