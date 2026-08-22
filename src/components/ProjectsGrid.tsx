@@ -14,15 +14,24 @@ export default function ProjectsGrid() {
         </h2>
       </Reveal>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, i) => (
-          <Reveal
-            key={project.id}
-            delay={(i % 3) * 0.08}
-            className={i % 3 === 0 ? "lg:col-span-2" : undefined}
-          >
-            <ProjectCard project={project} />
-          </Reveal>
-        ))}
+        {projects.map((project, i) => {
+          // Pairs of (wide, normal) fill exactly 3 columns per row. When the
+          // total is odd, the leftover last card spans the full row instead
+          // of sitting alone next to empty space.
+          const isOddTrailing =
+            projects.length % 2 !== 0 && i === projects.length - 1;
+          const spanClassName = isOddTrailing
+            ? "sm:col-span-2 lg:col-span-3"
+            : i % 2 === 0
+              ? "lg:col-span-2"
+              : undefined;
+
+          return (
+            <Reveal key={project.id} delay={(i % 3) * 0.08} className={spanClassName}>
+              <ProjectCard project={project} />
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
