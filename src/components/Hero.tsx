@@ -30,6 +30,34 @@ function ResumeDoodle() {
   );
 }
 
+// Same doodle as the resume arrow, flipped upside down, bridging the name
+// box across to the photo — nudged up so its loop pokes above the card's
+// top edge. Desktop-only — the two columns stack on mobile, so there's
+// nothing to bridge.
+function NameToPhotoDoodle() {
+  return (
+    <svg
+      viewBox="0 0 240 110"
+      className="pointer-events-none absolute left-[48%] top-0 z-20 hidden h-56 w-96 -translate-x-[15px] -translate-y-[66px] -rotate-3 -scale-y-100 text-doodle xl:block xl:h-64 xl:w-[28rem]"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M4,58 C34,20 54,92 86,64 C104,48 92,16 70,24 C50,31 58,64 90,72 C132,82 176,58 205,42"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M205,42 L192,36 M205,42 L195,54"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -46,6 +74,7 @@ export default function Hero() {
       className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-24 lg:px-16 lg:py-20 xl:px-24"
     >
       <div className="relative grid grid-cols-1 items-center gap-6 rounded-[32px] border-2 border-wine/25 bg-surface/60 p-6 shadow-card sm:p-8 lg:grid-cols-[1.6fr_.6fr] lg:gap-6 lg:p-10">
+        <NameToPhotoDoodle />
         <Reveal className="flex flex-col items-start gap-3 text-center lg:text-left">
           <span className="font-serif text-xl italic leading-relaxed text-ink-2 sm:text-2xl">
             Hi, I&apos;m
