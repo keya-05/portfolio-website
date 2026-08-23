@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   }, []);
 
   const imageFrameClassName =
-    "relative h-36 sm:h-40 overflow-hidden rounded-[14px] border border-line-2 bg-surface-2";
+    "relative h-36 sm:h-40 overflow-hidden rounded-2xl border border-cream/20 bg-surface";
 
   const imageContent = project.image ? (
     <Image
@@ -27,20 +27,14 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="object-cover object-top"
     />
   ) : (
-    <div
-      className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-3"
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(135deg, rgba(122,18,32,0.06) 0px, rgba(122,18,32,0.06) 10px, transparent 10px, transparent 20px)",
-      }}
-    >
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-3">
       <ImageIcon size={22} strokeWidth={1.5} />
       <span className="font-mono text-xs">Image coming soon</span>
     </div>
   );
 
   return (
-    <TiltCard className="flex h-full flex-col gap-3 rounded-card border border-line bg-surface p-4 shadow-card">
+    <TiltCard className="flex h-full flex-col gap-3 rounded-[28px] border border-wine bg-wine p-4 shadow-card sm:p-5">
       {mounted && !reduce ? (
         <motion.div
           className={imageFrameClassName}
@@ -56,11 +50,11 @@ export default function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="flex flex-col gap-1">
-        <h3 className="font-display text-lg font-bold text-ink">
+        <h3 className="font-script text-2xl leading-tight text-cream">
           {project.title}
         </h3>
-        <p className="text-sm font-medium text-wine">{project.role}</p>
-        <p className="line-clamp-2 text-sm leading-relaxed text-ink-2">
+        <p className="text-sm font-medium text-cream/70">{project.role}</p>
+        <p className="line-clamp-2 text-sm leading-relaxed text-cream/70">
           {project.description}
         </p>
       </div>
@@ -69,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         {project.tags.map((tag, i) => (
           <span
             key={`${project.id}-tag-${i}`}
-            className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-mono text-xs text-ink-2"
+            className="rounded-full border border-cream/25 px-2.5 py-0.5 font-mono text-xs text-cream/70"
           >
             {tag}
           </span>
@@ -82,12 +76,12 @@ export default function ProjectCard({ project }: { project: Project }) {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-wine hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-cream hover:underline"
           >
             View project <ArrowUpRight size={14} />
           </a>
         ) : (
-          <span className="inline-flex items-center gap-1 rounded-full border border-dashed border-line-2 px-3 py-1 font-mono text-xs text-ink-3">
+          <span className="inline-flex items-center gap-1 rounded-full border border-dashed border-cream/25 px-3 py-1 font-mono text-xs text-cream/60">
             Link coming soon
           </span>
         )}

@@ -5,11 +5,8 @@ import Reveal from "./motion/Reveal";
 export default function ProjectsGrid() {
   return (
     <section id="work" className="mx-auto max-w-screen-2xl px-6 py-10 sm:px-10 sm:py-12 lg:px-16 xl:px-24">
-      <Reveal className="mb-6 flex flex-col gap-2 text-center lg:text-left">
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-wine">
-          Selected work
-        </span>
-        <h2 className="text-balance font-display text-3xl font-bold text-ink sm:text-4xl">
+      <Reveal className="mb-6 text-center lg:text-right">
+        <h2 className="text-balance font-script text-5xl text-wine sm:text-6xl">
           Projects
         </h2>
       </Reveal>

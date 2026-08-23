@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { profile } from "@/content/profile";
+import { Home } from "lucide-react";
 
 const links = [
   { href: "#home", label: "Home" },
-  { href: "#work", label: "Work" },
+  { href: "#work", label: "Projects" },
   { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
@@ -62,23 +62,17 @@ export default function NavBar() {
     };
   }, []);
 
-  const initials = profile.name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
   return (
-    <div className="sticky top-4 z-50 flex justify-center px-4">
-      <nav className="flex w-full max-w-2xl items-center justify-between gap-2 rounded-full border border-line-2 bg-wine px-2 py-2 shadow-card">
+    <div className="sticky top-0 z-50 w-full bg-wine shadow-card">
+      <nav className="mx-auto flex max-w-screen-2xl items-center justify-between px-6 py-3 sm:px-10 lg:px-16 xl:px-24">
         <a
           href="#home"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-bg font-display text-sm font-bold text-wine"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-cream/40 text-cream transition-colors hover:bg-cream/10"
+          aria-label="Home"
         >
-          {initials}
+          <Home size={17} strokeWidth={1.75} />
         </a>
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar sm:gap-3">
           {links
             .filter((l) => l.href !== "#home")
             .map((link) => {
@@ -87,12 +81,12 @@ export default function NavBar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="relative whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-bg/85 transition-colors"
+                  className="relative whitespace-nowrap rounded-full px-3 py-1.5 font-script text-xl text-cream/85 transition-colors sm:text-2xl"
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-wine-2"
+                      className="absolute inset-0 rounded-full bg-cream/10"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
