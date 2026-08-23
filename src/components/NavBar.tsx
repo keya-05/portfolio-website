@@ -81,7 +81,7 @@ export default function NavBar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="relative whitespace-nowrap rounded-full px-3 py-1.5 font-script text-xl text-cream/85 transition-colors sm:text-2xl"
+                  className="relative whitespace-nowrap rounded-full px-3 py-1.5 font-serif text-xl text-cream/85 transition-colors sm:text-2xl"
                 >
                   {isActive && (
                     <motion.span

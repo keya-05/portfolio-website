@@ -9,7 +9,7 @@ export default function ProfilePhoto({
 }) {
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-wine/15 bg-placeholder shadow-card">
+      <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-[28px] border border-wine/15 bg-photo-bg shadow-card">
         {src && (
           <Image
             src={src}

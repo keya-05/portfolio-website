@@ -10,7 +10,7 @@ function ResumeDoodle() {
   return (
     <svg
       viewBox="0 0 240 110"
-      className="h-20 w-40 shrink-0 text-doodle sm:h-24 sm:w-48"
+      className="h-16 w-32 shrink-0 text-doodle sm:h-20 sm:w-40"
       fill="none"
       aria-hidden="true"
     >
@@ -45,10 +45,12 @@ export default function Hero() {
       ref={sectionRef}
       className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-24 lg:px-16 lg:py-20 xl:px-24"
     >
-      <div className="grid grid-cols-1 items-center gap-10 rounded-[32px] border-2 border-wine/25 bg-surface/60 p-8 shadow-card sm:p-12 lg:grid-cols-[1.2fr_.8fr] lg:gap-20 lg:p-16">
-        <Reveal className="flex flex-col items-start gap-6 text-center lg:text-left">
-          <span className="font-script text-3xl text-ink sm:text-4xl">Hi, I&apos;m</span>
-          <div className="rounded-2xl bg-wine px-7 py-3 shadow-card">
+      <div className="relative grid grid-cols-1 items-center gap-6 rounded-[32px] border-2 border-wine/25 bg-surface/60 p-6 shadow-card sm:p-8 lg:grid-cols-[1.6fr_.6fr] lg:gap-6 lg:p-10">
+        <Reveal className="flex flex-col items-start gap-3 text-center lg:text-left">
+          <span className="font-serif text-xl italic leading-relaxed text-ink-2 sm:text-2xl">
+            Hi, I&apos;m
+          </span>
+          <div className="w-full max-w-xl rounded-2xl bg-wine px-10 py-3 text-center shadow-card sm:px-14">
             <h1 className="font-script text-3xl leading-none text-cream sm:text-5xl">
               {profile.name}
             </h1>
@@ -59,7 +61,7 @@ export default function Hero() {
 
           {profile.resume && (
             <div className="flex items-center gap-1 self-center lg:self-start">
-              <span className="max-w-[8rem] font-serif text-lg italic leading-tight text-ink-2 sm:max-w-[10rem] sm:text-xl">
+              <span className="whitespace-nowrap font-serif text-lg italic text-ink-2 sm:text-xl">
                 Here&apos;s my resume
               </span>
               <ResumeDoodle />
@@ -67,7 +69,7 @@ export default function Hero() {
                 href={profile.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-wine bg-placeholder text-center font-script text-2xl text-wine shadow-card transition-transform hover:scale-105 sm:h-28 sm:w-28 sm:text-3xl"
+                className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-wine bg-placeholder text-center font-serif text-xl text-wine shadow-card transition-transform hover:scale-105 sm:h-24 sm:w-24 sm:text-2xl"
               >
                 resume
               </a>

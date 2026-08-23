@@ -7,6 +7,7 @@ export const experience: Experience[] = [
     title: "Backend Intern",
     org: "Hapticware Intelligence Pvt Ltd",
     period: "06/2026 – Present",
+    logo: "/images/hapticware-logo.png",
     points: [
       "Develop and maintain scalable server-side applications, collaborating closely with frontend and product teams to ensure seamless end-to-end feature delivery.",
       "Design and optimize RESTful APIs to improve system response times, database performance, and overall service reliability.",
@@ -19,6 +20,7 @@ export const experience: Experience[] = [
     title: "AI-ML Virtual Internship",
     org: "Google for Developers & AICTE",
     period: "04/2025 – 06/2025",
+    logo: "/images/Eduskills.png",
     points: [
       "Implemented model training, data preprocessing, and performance evaluation using TensorFlow and Keras.",
       "Built a supervised machine learning classification model to solve real-world predictive analysis challenges.",

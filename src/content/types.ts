@@ -35,4 +35,6 @@ export type Experience = {
   org: string;
   period: string;
   points: string[];
+  /** Path under /public, e.g. "/images/company-logo.png". Leave undefined to show initials instead. */
+  logo?: string;
 };

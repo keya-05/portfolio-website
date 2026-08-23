@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { experience } from "@/content/experience";
 import Reveal from "./motion/Reveal";
 
@@ -35,12 +36,17 @@ function HeadingDoodleMobile() {
 // boxes, and gaps below are actually rendered at. The connector line is
 // computed from these same numbers, so it lands exactly on the heading and
 // every circle instead of floating between them — keep them in sync with
-// the classNames below (sm:h-28, sm:h-52, sm:gap-12, the mb-10 under the
-// heading).
+// the classNames below (sm:h-28, sm:h-[232px], sm:gap-12, the mb-10 under
+// the heading). ROW_H = inner circle (208px) + 2x the ring padding (12px).
 const HEAD_H = 112;
 const HEAD_GAP = 40;
-const ROW_H = 208;
+const ROW_H = 232;
 const ROW_GAP = 48;
+// Circle x-positions as a fraction of the container width. The container
+// now spans the section's full width, with the second (lower) circle
+// pushed further right to fill the space that used to sit empty there.
+const ROW_X_LEFT = 14;
+const ROW_X_RIGHT = 90;
 
 // One continuous hand-drawn line running from the tail of "Experience"
 // through every circle's center, zigzagging left/right along the way.
@@ -50,11 +56,14 @@ function ExperienceConnector({ count }: { count: number }) {
   const totalHeight = HEAD_H + HEAD_GAP + count * ROW_H + (count - 1) * ROW_GAP;
 
   const points = [
-    { x: 30, y: (HEAD_H / totalHeight) * 100 },
+    { x: 26, y: (HEAD_H / totalHeight) * 100 },
     ...Array.from({ length: count }, (_, i) => {
       const rowTop = HEAD_H + HEAD_GAP + i * (ROW_H + ROW_GAP);
       const centerY = rowTop + ROW_H / 2;
-      return { x: i % 2 === 0 ? 9 : 91, y: (centerY / totalHeight) * 100 };
+      return {
+        x: i % 2 === 0 ? ROW_X_LEFT : ROW_X_RIGHT,
+        y: (centerY / totalHeight) * 100,
+      };
     }),
   ];
 
@@ -76,7 +85,7 @@ function ExperienceConnector({ count }: { count: number }) {
       <path
         d={d}
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="3"
         fill="none"
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
@@ -89,11 +98,11 @@ export default function Experience() {
   return (
     <section id="experience" className="w-full bg-taupe">
       <div className="mx-auto max-w-screen-2xl px-6 py-16 sm:px-10 sm:py-20 lg:px-16 xl:px-24">
-        <div className="relative mx-auto max-w-3xl">
+        <div className="relative">
           <ExperienceConnector count={experience.length} />
 
           <Reveal className="relative z-10 mb-10 flex flex-col items-start gap-1 sm:h-28 sm:justify-center">
-            <h2 className="text-balance font-script text-5xl text-ink sm:text-6xl">
+            <h2 className="text-balance font-serif text-5xl text-ink sm:text-6xl">
               Experience
             </h2>
             <HeadingDoodleMobile />
@@ -106,30 +115,48 @@ export default function Experience() {
                 <Reveal
                   key={role.id}
                   delay={i * 0.08}
-                  className="relative z-10 sm:h-52"
+                  className="relative z-10 sm:h-[232px]"
                 >
                   <div
                     className={`flex h-full flex-col items-center gap-5 sm:flex-row sm:gap-8 ${
                       reversed ? "sm:flex-row-reverse sm:text-right" : "sm:text-left"
                     }`}
                   >
-                    <div className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full border-2 border-wine bg-placeholder font-mono text-sm uppercase tracking-wide text-ink-3 shadow-card sm:h-52 sm:w-52">
-                      {orgInitials(role.org) || "LOGO"}
+                    <div className="flex shrink-0 items-center justify-center rounded-full bg-wine p-2 shadow-card sm:p-3">
+                      <div className="relative h-32 w-32 overflow-hidden rounded-full bg-placeholder sm:h-52 sm:w-52">
+                        {role.logo ? (
+                          <Image
+                            src={role.logo}
+                            alt={role.org}
+                            fill
+                            sizes="(min-width: 640px) 208px, 128px"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center font-mono text-sm uppercase tracking-wide text-ink-3">
+                            {orgInitials(role.org) || "LOGO"}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex flex-1 flex-col gap-1 text-center sm:text-left">
+                    <div
+                      className={`flex flex-1 flex-col gap-1 text-center ${
+                        reversed ? "sm:text-right" : "sm:text-left"
+                      }`}
+                    >
                       <div
                         className={`flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3 ${
                           reversed ? "sm:flex-row-reverse" : ""
                         }`}
                       >
-                        <h3 className="font-script text-3xl leading-none text-cream">
+                        <h3 className="font-serif text-3xl leading-none text-cream">
                           {role.title}
                         </h3>
                         <p className="font-serif text-lg italic text-cream/80">
                           {role.org}
                         </p>
                       </div>
-                      <p className="font-mono text-xs uppercase tracking-wide text-cream/60">
+                      <p className="font-mono text-sm uppercase tracking-wide text-cream/60 sm:text-base">
                         {role.period}
                       </p>
                     </div>

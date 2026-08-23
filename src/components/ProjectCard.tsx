@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   }, []);
 
   const imageFrameClassName =
-    "relative h-36 sm:h-40 overflow-hidden rounded-2xl border border-cream/20 bg-surface";
+    "relative h-48 sm:h-56 overflow-hidden rounded-[28px] border border-cream/20 bg-surface";
 
   const imageContent = project.image ? (
     <Image
@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       alt={project.title}
       fill
       sizes="(min-width: 1024px) 480px, 90vw"
-      className="object-cover object-top"
+      className="object-contain"
     />
   ) : (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-3">
@@ -38,8 +38,8 @@ export default function ProjectCard({ project }: { project: Project }) {
       {mounted && !reduce ? (
         <motion.div
           className={imageFrameClassName}
-          initial={{ clipPath: "inset(0 0 100% 0)" }}
-          whileInView={{ clipPath: "inset(0 0 0% 0)" }}
+          initial={{ clipPath: "inset(0 0 100% 0 round 28px)" }}
+          whileInView={{ clipPath: "inset(0 0 0% 0 round 28px)" }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -50,7 +50,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="flex flex-col gap-1">
-        <h3 className="font-script text-2xl leading-tight text-cream">
+        <h3 className="font-serif text-2xl leading-tight text-cream">
           {project.title}
         </h3>
         <p className="text-sm font-medium text-cream/70">{project.role}</p>

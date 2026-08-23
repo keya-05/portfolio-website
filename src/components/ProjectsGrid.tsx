@@ -6,7 +6,7 @@ export default function ProjectsGrid() {
   return (
     <section id="work" className="mx-auto max-w-screen-2xl px-6 py-10 sm:px-10 sm:py-12 lg:px-16 xl:px-24">
       <Reveal className="mb-6 text-center lg:text-right">
-        <h2 className="text-balance font-script text-5xl text-wine sm:text-6xl">
+        <h2 className="text-balance font-serif text-5xl text-wine sm:text-6xl">
           Projects
         </h2>
       </Reveal>
