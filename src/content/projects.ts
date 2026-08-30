@@ -10,8 +10,8 @@ export const projects: Project[] = [
     description:
       "Multi-tier application with decoupled frontend and backend services, integrating external LLM APIs for automated sentiment classification. Used targeted prompt engineering to cut model hallucination and built optimized backend pipelines for stable, large-scale feedback processing.",
     tags: ["React", "Node.js", "REST APIs", "MySQL"],
-    image: undefined,
-    link: undefined,
+    image: "/images/projects/sentiment-analysis.png",
+    link: "https://sentiment-analysis-kappa-black.vercel.app/",
   },
   {
     id: "intelligent-order-management",
@@ -32,5 +32,15 @@ export const projects: Project[] = [
     tags: ["React", "Node.js", "Express.js", "MongoDB"],
     image: undefined,
     link: undefined,
+  },
+  {
+    id: "ai-learning-path-generator",
+    title: "AI-Powered Learning Path Generator",
+    role: "Full-stack developer",
+    description:
+      "Adaptive learning dashboard that maps prerequisite structure between concepts and flags gaps before a learner moves on to dependent topics. Visualizes a concept dependency graph and per-unit skill mastery, and surfaces exam readiness, study time, and days-until-exam tracking alongside an AI assistant for personalized guidance.",
+    tags: ["React", "AI/LLM", "Data Visualization"],
+    image: "/images/projects/ai-learning-path-generator.png",
+    link: "https://ai-powered-learning-path-generator.vercel.app",
   },
 ];

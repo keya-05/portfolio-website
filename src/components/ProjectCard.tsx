@@ -7,7 +7,13 @@ import { ArrowUpRight, ImageIcon } from "lucide-react";
 import type { Project } from "@/content/types";
 import TiltCard from "./motion/TiltCard";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  wide = false,
+}: {
+  project: Project;
+  wide?: boolean;
+}) {
   const reduce = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
@@ -19,13 +25,33 @@ export default function ProjectCard({ project }: { project: Project }) {
     "relative h-48 sm:h-56 overflow-hidden rounded-[28px] border border-cream/20 bg-surface";
 
   const imageContent = project.image ? (
-    <Image
-      src={project.image}
-      alt={project.title}
-      fill
-      sizes="(min-width: 1024px) 480px, 90vw"
-      className="object-contain"
-    />
+    wide ? (
+      <>
+        <Image
+          src={project.image}
+          alt=""
+          aria-hidden
+          fill
+          sizes="(min-width: 1024px) 480px, 90vw"
+          className="scale-125 object-cover opacity-60 blur-2xl"
+        />
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(min-width: 1024px) 480px, 90vw"
+          className="relative object-contain"
+        />
+      </>
+    ) : (
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        sizes="(min-width: 1024px) 480px, 90vw"
+        className="object-cover"
+      />
+    )
   ) : (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-ink-3">
       <ImageIcon size={22} strokeWidth={1.5} />
