@@ -4,7 +4,7 @@ import { availability, contactChannels, links, profile, site, type ContactChanne
 import { play } from '../../lib/sounds';
 import { useScrollParallax } from '../../hooks/useScrollParallax';
 import { useGame } from '../shell/GameContext';
-import { CheckIcon, ExternalIcon, PhoneIcon } from '../ui/Icons';
+import { CheckIcon, DistrictIcon, ExternalIcon, PhoneIcon } from '../ui/Icons';
 import { DistrictSection } from './DistrictSection';
 
 type CallState = 'idle' | 'ringing' | 'directory';
@@ -201,14 +201,14 @@ export function Connect() {
                     Incoming call
                   </p>
                   <motion.span
-                    className="mt-8 grid h-28 w-28 place-items-center rounded-full border-2 border-yellow bg-yellow/10 font-display text-5xl text-yellow"
+                    className="mt-8 grid h-28 w-28 place-items-center rounded-full border-2 border-yellow bg-yellow/10 text-yellow"
                     animate={{ rotate: [0, -7, 7, -5, 5, 0] }}
                     transition={{ duration: 0.6, repeat: 3, repeatDelay: 0.5 }}
                     aria-hidden="true"
                   >
-                    {profile.alias}
+                    <DistrictIcon id="profile" width={52} height={52} strokeWidth={1.4} />
                   </motion.span>
-                  <p className="display mt-6 text-4xl">{profile.alias}</p>
+                  <p className="display mt-6 text-4xl">{profile.fullName}</p>
                   <p className="font-ui text-base uppercase tracking-hud text-off-white/80">
                     {profile.title} · {site.city}
                   </p>

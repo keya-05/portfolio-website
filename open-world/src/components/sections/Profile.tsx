@@ -35,7 +35,7 @@ function Character() {
   return (
     <img
       src={profile.photo}
-      alt={`${profile.fullName}, alias ${profile.alias}`}
+      alt={profile.fullName}
       width={520}
       height={650}
       decoding="async"
@@ -141,10 +141,14 @@ export function Profile() {
                 style={{ background: 'radial-gradient(circle at 50% 62%, rgba(246,215,67,.28) 0%, rgba(232,93,117,.12) 38%, transparent 66%)' }}
               />
               <span
-                className="display text-outline absolute inset-x-0 top-[6%] select-none text-center text-[clamp(10rem,38vw,20rem)]"
+                className="display text-outline absolute inset-x-0 top-[6%] select-none text-center text-[clamp(4.5rem,17vw,9rem)]"
                 aria-hidden="true"
               >
-                {profile.alias}
+                {profile.fullName.split(' ').map((part) => (
+                  <span key={part} className="block">
+                    {part}
+                  </span>
+                ))}
               </span>
               <div
                 className="absolute inset-x-[12%] bottom-[8%] h-[38%] opacity-30"
@@ -183,9 +187,9 @@ export function Profile() {
             Player profile // Character select
           </p>
           <h1 id="profile-heading" tabIndex={-1} data-section-heading data-reveal className="mt-3">
-            <span className="display block text-7xl text-off-white sm:text-8xl">{profile.alias}</span>
-            <span className="mt-1 block font-ui text-xl font-semibold uppercase tracking-[0.18em] text-off-white/80">
-              {profile.fullName} · {profile.title}
+            <span className="display block text-[clamp(3rem,13vw,4.5rem)] text-off-white lg:text-8xl">{profile.fullName}</span>
+            <span className="mt-2 block font-ui text-xl font-semibold uppercase tracking-[0.18em] text-off-white/80">
+              {profile.title}
             </span>
           </h1>
 

@@ -54,8 +54,8 @@ export function HUD() {
         <div className="pointer-events-auto pt-2">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 animate-pulse-soft rounded-full bg-green" aria-hidden="true" />
-            <span className="font-ui text-sm font-bold uppercase tracking-hud text-off-white md:text-base">
-              KC <span className="text-yellow">//</span> Online
+            <span className="font-ui text-xs font-bold uppercase tracking-[0.14em] text-off-white sm:text-sm md:text-base md:tracking-hud">
+              Keya Chaudhary <span className="text-yellow">//</span> Online
             </span>
           </div>
           <p className="mt-0.5 pl-4 font-ui text-xs font-semibold uppercase tracking-hud text-off-white/80">

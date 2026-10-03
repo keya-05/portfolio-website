@@ -10,7 +10,7 @@ type State = 'idle' | 'downloading' | 'complete';
 function triggerDownload() {
   const a = document.createElement('a');
   a.href = links.resume;
-  a.download = 'KC-Dossier.pdf';
+  a.download = 'Keya-Chaudhary-Resume.pdf';
   document.body.appendChild(a);
   a.click();
   a.remove();

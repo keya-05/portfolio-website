@@ -7,10 +7,10 @@ import { SoundToggle } from '../shell/HUD';
 import { SkylineArt } from '../shell/Skyline';
 import { useGame } from '../shell/GameContext';
 
-const LOADING_TEXT = 'LOADING KC';
+const LOADING_TEXT = 'LOADING KEYA CHAUDHARY';
 
 /**
- * Boot sequence (~3s): black → grain → typed "LOADING KC_" → skyline push-in
+ * Boot sequence (~3s): black → grain → typed "LOADING KEYA CHAUDHARY_" → skyline push-in
  * → player card → pulsing CTA. Clicking dives the camera into the city while
  * the portfolio mounts underneath.
  */
@@ -38,7 +38,7 @@ export function LoadingScreen() {
       }
 
       tl.to(q('[data-intro-grain]'), { opacity: 0.07, duration: 0.3 }, 0.1)
-        .to(q('[data-char]'), { opacity: 1, duration: 0.01, stagger: 0.07 }, 0.3)
+        .to(q('[data-char]'), { opacity: 1, duration: 0.01, stagger: 0.035 }, 0.3)
         .fromTo(
           q('[data-intro-sky]'),
           { opacity: 0, scale: 1 },
@@ -125,7 +125,7 @@ export function LoadingScreen() {
 
       {/* typed loading text */}
       <div className="absolute inset-0 grid place-items-center">
-      <p data-loading className="font-ui text-2xl font-semibold tracking-[0.3em] text-off-white sm:text-3xl" aria-label="Loading KC">
+      <p data-loading className="px-4 text-center font-ui text-lg font-semibold tracking-[0.2em] text-off-white sm:text-3xl sm:tracking-[0.3em]" aria-label="Loading Keya Chaudhary">
         {LOADING_TEXT.split('').map((c, i) => (
           <span key={i} data-char className="opacity-0" aria-hidden="true">
             {c === ' ' ? ' ' : c}
@@ -138,12 +138,16 @@ export function LoadingScreen() {
       </div>
 
       {/* player card */}
-      <div data-card className="absolute bottom-[14vh] left-4 right-4 max-w-md sm:left-10 md:left-16">
+      <div data-card className="absolute bottom-[14vh] left-4 right-4 max-w-xl sm:left-10 md:left-16">
         <p data-card-line className="hud-label text-yellow opacity-0">
           Player 01 // {site.city}
         </p>
-        <p data-card-line className="display mt-1 text-[clamp(5rem,18vw,9rem)] text-off-white opacity-0">
-          {profile.alias}
+        <p data-card-line className="display mt-1 text-[clamp(3.25rem,13vw,6.5rem)] text-off-white opacity-0">
+          {profile.fullName.split(' ').map((part) => (
+            <span key={part} className="block">
+              {part}
+            </span>
+          ))}
         </p>
         <p data-card-line className="font-ui text-2xl font-bold uppercase tracking-[0.2em] text-yellow opacity-0">
           {profile.title}
