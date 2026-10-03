@@ -1,0 +1,11 @@
+# Build the Vite app in open-world/ instead of the Next.js app at the repo root.
+# Applies to every branch that contains this file (merging it into main switches production too).
+[build]
+  base = "open-world"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # The Next.js runtime plugin is enabled in the Netlify UI; this site isn't Next.js.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
