@@ -126,7 +126,7 @@ export interface ContactChannel {
 }
 
 export const site = {
-  name: 'KC // OPEN WORLD',
+  name: 'KEYA CHAUDHARY // OPEN WORLD',
   city: 'K-CITY',
   tagline: 'ONE DEVELOPER. MULTIPLE MISSIONS. NO FAST TRAVEL.',
   timeZone: 'Asia/Kolkata',
@@ -144,12 +144,12 @@ export const districts: District[] = [
 export const completionDistricts: DistrictId[] = ['profile', 'career', 'campus', 'projects'];
 
 export const profile: Profile = {
-  alias: 'KC',
+  alias: 'Keya Chaudhary',
   fullName: 'Keya Chaudhary',
   title: 'The Developer',
   location: 'Pune, India',
   roleLines: [
-    'Final-year B.Tech CS (AI specialization)',
+    'Final-year B.Tech CS (AI & edge computing specialization)',
     'Full-stack / AI agent builder',
     'Backend x DevOps',
   ],
@@ -334,7 +334,7 @@ export const projects: Project[] = [
 /** Unlocks on the board once every project above has been opened. */
 export const secretMission: Project = {
   id: 'secret-open-world',
-  title: 'KC // OPEN WORLD',
+  title: 'KEYA CHAUDHARY // OPEN WORLD',
   type: 'Experimental',
   status: 'Currently building',
   tech: ['React', 'TypeScript', 'GSAP', 'Lenis', 'Framer Motion', 'Tailwind CSS'],

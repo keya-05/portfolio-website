@@ -12,7 +12,7 @@ export default function CompletionScreen() {
   return (
     <Sheet
       titleId="completion-title"
-      kicker="KC portfolio"
+      kicker="Keya Chaudhary // Portfolio"
       title={<span className="text-yellow">Mission passed</span>}
       closeLabel="Close completion screen"
       onClose={closeOverlay}
@@ -53,7 +53,7 @@ export default function CompletionScreen() {
       <p className="mt-6 font-body text-sm italic text-off-white/75">*There are always more missions.</p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Button onClick={() => navigateTo('connect')}>[ Contact KC ]</Button>
+        <Button onClick={() => navigateTo('connect')}>[ Contact Keya Chaudhary ]</Button>
         <Button variant="ghost" onClick={resetProgress}>
           [ Replay ]
         </Button>

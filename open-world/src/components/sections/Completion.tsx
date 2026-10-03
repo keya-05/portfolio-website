@@ -39,12 +39,12 @@ export function Completion() {
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           {completionReady && <Button onClick={() => openOverlay('completion')}>View results</Button>}
           <Button variant="ghost" onClick={() => navigateTo('connect')}>
-            Contact KC
+            Contact Keya Chaudhary
           </Button>
         </div>
 
         <p className="mt-10 font-ui text-sm uppercase tracking-hud text-off-white/70">
-          © {new Date().getFullYear()} KC · Built in {site.city}, Pune ·{' '}
+          © {new Date().getFullYear()} Keya Chaudhary · Built in {site.city}, Pune ·{' '}
           <button type="button" onClick={() => setClassic(true)} className="underline underline-offset-4 hover:text-yellow">
             Classic view
           </button>

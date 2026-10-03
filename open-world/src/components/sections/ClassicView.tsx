@@ -83,7 +83,7 @@ export function ClassicView() {
       <main id="classic-main" tabIndex={-1} className="mx-auto max-w-3xl px-5 pb-20 leading-relaxed">
         <h1 className="font-display text-5xl uppercase sm:text-6xl">{profile.fullName}</h1>
         <p className="mt-2 text-lg text-off-white/80">
-          {profile.alias} · {profile.roleLines.join(' · ')} · {profile.location}
+          {profile.roleLines.join(' · ')} · {profile.location}
         </p>
         <p className="mt-6 text-off-white/85">{profile.bio}</p>
         <p className="mt-6">
