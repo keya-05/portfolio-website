@@ -1,0 +1,113 @@
+@import 'lenis/dist/lenis.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: var(--black);
+    color: var(--off-white);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply font-body antialiased;
+    min-width: 320px;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  /* One consistent, high-visibility focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 3px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* Thin, tracked HUD label */
+  .hud-label {
+    @apply font-ui text-xs font-medium uppercase tracking-hud text-hud-gray;
+  }
+
+  .display {
+    @apply font-display uppercase leading-[0.9];
+  }
+
+  .panel {
+    background: var(--panel);
+    @apply border border-off-white/10;
+  }
+
+  /* Static film grain. Rendered once as an SVG texture — never animated per frame. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-intro -translate-y-24 bg-yellow px-4 py-2 font-ui text-sm font-bold uppercase tracking-hud text-black;
+  }
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(242, 240, 232, 0.18);
+  }
+}
+
+/* Opacity-only loops (cheap, compositor-friendly). */
+@keyframes kc-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes kc-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.animate-blink {
+  animation: kc-blink 1s steps(1) infinite;
+}
+.animate-pulse-soft {
+  animation: kc-pulse 1.6s ease-in-out infinite;
+}
+/* Finite attention pulse — stops by itself (no always-running loop). */
+.animate-pulse-few {
+  animation: kc-pulse 1.4s ease-in-out 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
